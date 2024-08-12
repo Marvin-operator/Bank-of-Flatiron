@@ -1,6 +1,24 @@
 import React from "react";
 
-function AddTransactionForm() {
+function AddTransactionForm({setOnAddTrans, onAddTrans}) {
+
+  const handleSubmit = ()=>{
+    fetch('http://localhost:3000/transactions', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((res) => {
+      setOnAddTrans(!onAddTrans)
+  });
+  }
   return (
     <div className="ui segment">
       <form className="ui form">
